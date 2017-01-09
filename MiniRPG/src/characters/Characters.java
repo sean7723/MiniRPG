@@ -61,4 +61,11 @@ public abstract class Characters {
 	public void setHealth(int amount) {
 		_health = amount;
 	}
+	
+	public void printStats(){
+		System.out.println("Name: " + _name);
+		System.out.println("Health: " + _health);
+		System.out.println("Attack: " + _attack);
+		System.out.println("Armor: " + _armor);
+	}
 }
