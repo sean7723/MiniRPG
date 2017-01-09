@@ -69,7 +69,4 @@ public abstract class Characters {
 		System.out.println("Armor: " + _armor);
 	}
 	
-	public void wilsonTest() {
-		//Delete This Method
-	}
 }
