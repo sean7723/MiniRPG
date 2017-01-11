@@ -2,6 +2,7 @@ package Interface;
 
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +22,9 @@ public class PlayerInterface implements Runnable {
 	private JLabel _playerInt3;
 	private JLabel _playerInt4;
 	private JLabel _playerInt5;
+	private JButton _hitButton;
+	private JButton _skillButton;
+	private JButton _inventoryButton;
 	
 	public PlayerInterface() {
 		_frame = new JFrame("Fun Adventures");
@@ -31,9 +35,9 @@ public class PlayerInterface implements Runnable {
 		_enemy5 = new JLabel("Hello");
 		_playerInt1 = new JLabel("temp");
 		_playerInt2 = new JLabel("temp");
-		_playerInt3 = new JLabel("temp");
-		_playerInt4 = new JLabel("temp");
-		_playerInt5 = new JLabel("temp");
+		_hitButton = new JButton("Hit");
+		_skillButton = new JButton("Skill");
+		_inventoryButton = new JButton("Inventory");
 		
 		_model = new BackEnd((String)JOptionPane.showInputDialog("Hello adventurer, what is your name?"), this);
 		update();
@@ -45,17 +49,22 @@ public class PlayerInterface implements Runnable {
 	
 	@Override
 	public void run() {
-		_frame.getContentPane().setLayout(new GridLayout(2, 5));
+		_frame.getContentPane().setLayout(new GridLayout(3, 5));
 		_frame.add(_enemy1);
 		_frame.add(_enemy2);
 		_frame.add(_enemy3);
 		_frame.add(_enemy4);
 		_frame.add(_enemy5);
+		_frame.add(new JLabel("---------------------"));
+		_frame.add(new JLabel("---------------------"));
+		_frame.add(new JLabel("---------------------"));
+		_frame.add(new JLabel("---------------------"));
+		_frame.add(new JLabel("---------------------"));
 		_frame.add(_playerInt1);
 		_frame.add(_playerInt2);
-		_frame.add(_playerInt3);
-		_frame.add(_playerInt4);
-		_frame.add(_playerInt5);
+		_frame.add(_hitButton);
+		_frame.add(_skillButton);
+		_frame.add(_inventoryButton);
 		
 		_frame.pack();
 		_frame.setVisible(true);
@@ -88,5 +97,9 @@ public class PlayerInterface implements Runnable {
 						"<br />Attack: " + _model.getEnemy5().getAttack() +
 						"<br />Armor: " + _model.getEnemy5().getArmor() + "</html>"
 						);
+		_playerInt1.setText(_model.getPlayer().getName());
+		_playerInt2.setText("<html>Health: " + _model.getEnemy3().getHealth() + 
+							"<br />Attack: " + _model.getEnemy3().getAttack() +
+							"<br />Armor: " + _model.getEnemy3().getArmor() + "</html>");
 	}
 }

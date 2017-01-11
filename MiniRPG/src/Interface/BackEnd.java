@@ -46,4 +46,8 @@ public class BackEnd {
 	public Enemies getEnemy5() {
 		return _enemies.get(4);
 	}
+	
+	public Player getPlayer() {
+		return _player;
+	}
 }
