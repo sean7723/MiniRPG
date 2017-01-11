@@ -16,4 +16,4 @@ public class Fireball extends OffensiveSkills {
 		}
 		return false;
 	}
-} 
+}  

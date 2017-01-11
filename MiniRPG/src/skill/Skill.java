@@ -20,3 +20,4 @@ public abstract class Skill {
 		return _caster.getName();
 	}
 }
+ 

@@ -13,4 +13,4 @@ public abstract class SelfBuffs extends Skill {
 	
 	abstract boolean use();
 }
- 
+  
