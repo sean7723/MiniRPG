@@ -15,7 +15,7 @@ public abstract class Skill {
 	public String getName() {
 		return _name;
 	}
-	
+	 
 	public String getCasterName() {
 		return _caster.getName();
 	}

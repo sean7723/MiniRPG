@@ -13,3 +13,4 @@ public abstract class OffensiveSkills extends Skill {
 	
 	abstract boolean use(Characters target);
 }
+ 
