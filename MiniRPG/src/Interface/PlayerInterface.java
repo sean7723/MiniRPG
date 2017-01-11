@@ -55,11 +55,11 @@ public class PlayerInterface implements Runnable {
 		_frame.add(_enemy3);
 		_frame.add(_enemy4);
 		_frame.add(_enemy5);
-		_frame.add(new JLabel("---------------------"));
-		_frame.add(new JLabel("---------------------"));
-		_frame.add(new JLabel("---------------------"));
-		_frame.add(new JLabel("---------------------"));
-		_frame.add(new JLabel("---------------------"));
+		_frame.add(new JLabel("----------------------"));
+		_frame.add(new JLabel("----------------------"));
+		_frame.add(new JLabel("----------------------"));
+		_frame.add(new JLabel("----------------------"));
+		_frame.add(new JLabel("----------------------"));
 		_frame.add(_playerInt1);
 		_frame.add(_playerInt2);
 		_frame.add(_hitButton);
@@ -98,8 +98,8 @@ public class PlayerInterface implements Runnable {
 						"<br />Armor: " + _model.getEnemy5().getArmor() + "</html>"
 						);
 		_playerInt1.setText(_model.getPlayer().getName());
-		_playerInt2.setText("<html>Health: " + _model.getEnemy3().getHealth() + 
-							"<br />Attack: " + _model.getEnemy3().getAttack() +
-							"<br />Armor: " + _model.getEnemy3().getArmor() + "</html>");
+		_playerInt2.setText("<html>Health: " + _model.getPlayer().getHealth() + 
+							"<br />Attack: " + _model.getPlayer().getAttack() +
+							"<br />Armor: " + _model.getPlayer().getArmor() + "</html>");
 	}
 }
