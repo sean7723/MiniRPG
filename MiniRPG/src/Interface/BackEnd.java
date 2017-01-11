@@ -10,6 +10,7 @@ public class BackEnd {
 	
 	private PlayerInterface _inter;
 	private ArrayList<Enemies> _enemies;
+	private String[] _names = {"Joe", "Bob", "Jeff", "Rick", "Robert", "Gustav"};
 	private Player _player;
 	
 	public BackEnd(String name, PlayerInterface inter) {
@@ -19,15 +20,22 @@ public class BackEnd {
 		createEnemies();
 	}
 	
-	public void createEnemies() {
+	/*public void createEnemies() {
 		_enemies.add(new Enemies(100, 10, 10, "Bob"));
 		_enemies.add(new Enemies(100, 10, 10, "Charlie"));
 		_enemies.add(new Enemies(100, 10, 10, "Mark"));
 		_enemies.add(new Enemies(100, 10, 10, "Jose"));
 		_enemies.add(new Enemies(100, 10, 10, "Greg"));
+	}*/
+	
+	public void createEnemies() {
+		for (int i = 0; i < 5; i ++)
+		{
+			_enemies.add(new Enemies((int)(Math.random()*999000+1000), (int)(Math.random()*90+10), (int)(Math.random()*90+10), _names[(int)(Math.random()*5+1)]));
+		}
 	}
 	
-	public Enemies getEnemy1() {
+	public  Enemies getEnemy1() {
 		return _enemies.get(0);
 	}
 	
