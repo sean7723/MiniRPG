@@ -21,31 +21,37 @@ public abstract class Characters {
 		_equippedItems = new ArrayList<Equipable>();
 	}
 	
-	public String hit(Characters c) {
-		int damageDone = (int)((Math.random() * (_attack * 0.1) * 2) + 1) + (_attack - (int)(_attack * 0.2)) ;
-		if(c.getHealth() <= 0)
-			return _name + " can't attack " + c.getName() + " because he is dead!"; 
-		if(c.getHealth() - damageDone <= 0) {
-			c.setHealth(0);
-			return _name + " has hit " + c.getName() + " for " + damageDone + " damage. " + c.getName() + " has died.";
+	public boolean hit(Characters c) {
+		if(_health > 0) {
+			int damageDone = (int)((Math.random() * (_attack * 0.1) * 2) + 1) + (_attack - (int)(_attack * 0.2)) ;
+			if(c.getHealth() <= 0)
+				return false;
+			if(c.getHealth() - damageDone <= 0) {
+				c.setHealth(0);
+				return true;
+			}
+			else {
+				c.setHealth(c.getHealth() - damageDone);
+				return true;
+			}
 		}
-		else {
-			c.setHealth(c.getHealth() - damageDone);
-			return _name + " has hit " + c.getName() + " for " + damageDone + " damage. " + c.getName() + " has " + c.getHealth() + " hp left.";
-		}
+		return false;
 	}
 	
-	public String hit(Characters c, int amount) {
-		if(c.getHealth() <= 0)
-			return _name + " can't attack " + c.getName() + " because he is dead!"; 
-		if(c.getHealth() - amount <= 0) {
-			c.setHealth(0);
-			return _name + " has hit " + c.getName() + " for " + amount + " damage. " + c.getName() + " has died.";
+	public boolean hit(Characters c, int amount) {
+		if(_health > 0) {
+			if(c.getHealth() <= 0)
+				return false;
+			if(c.getHealth() - amount <= 0) {
+				c.setHealth(0);
+				return true;
+			}
+			else {
+				c.setHealth(c.getHealth() - amount);
+				return true;
+			}
 		}
-		else {
-			c.setHealth(c.getHealth() - amount);
-			return _name + " has hit " + c.getName() + " for " + amount + " damage. " + c.getName() + " has " + c.getHealth() + " hp left.";
-		}
+		return false;
 	}
 	
 	public void equipItem(Equipable e){
