@@ -31,6 +31,8 @@ public class BackEnd {
 	
 	public void hit(Characters target) {
 		_battleLog = _player.hit(target);
+		for(int i = 0; i < _enemies.size(); i++)
+			_enemies.get(i).hit(_player);
 		_inter.update();
 	}
 	
