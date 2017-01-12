@@ -1,15 +1,11 @@
 package characters;
 
-import java.util.ArrayList;
-import item.*;
 public abstract class Characters {
 	
 	private int _health;
 	private int _attack;
 	private int _armor;
 	private String _name;
-	private ArrayList<Item> _inventory;
-	private ArrayList<Equipable> _equippedItems;
 	
 	
 	public Characters(int health, int attack, int armor, String name) {
@@ -17,8 +13,6 @@ public abstract class Characters {
 		_attack = attack;
 		_armor = armor;
 		_name = name;
-		_inventory = new ArrayList<Item>();
-		_equippedItems = new ArrayList<Equipable>();
 	}
 	
 	public String hit(Characters c) {
@@ -48,11 +42,6 @@ public abstract class Characters {
 		}
 	}
 	
-	public void equipItem(Equipable e){
-		_equippedItems.add(e);
-		addStats();
-	}
-	
 	public int getArmor() {
 		return _armor;
 	}
@@ -71,18 +60,6 @@ public abstract class Characters {
 	
 	public void setHealth(int amount) {
 		_health = amount;
-	}
-	
-	private void addStats(){
-		int health = _health;
-		int attack = _attack;
-		int armor = _armor;
-		for(int i = 0; i < _equippedItems.size(); i++){
-			attack += _equippedItems.get(i).getAttack();
-			armor += _equippedItems.get(i).getArmor();
-		}
-		_attack = attack;
-		_armor = armor;
 	}
 	
 	public void printStats(){
