@@ -102,7 +102,7 @@ public class PlayerInterface implements Runnable {
 		//fourth row
 		_panel4.add(_playerInt1);
 		_panel4.add(_playerInt2);
-		_panel4.add(_hitButton);
+		_panel4.add(new JLabel("Click Target to Hit"));
 		_panel4.add(_skillButton);
 		_panel4.add(_inventoryButton);
 
