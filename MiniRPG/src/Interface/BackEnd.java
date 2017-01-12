@@ -10,7 +10,7 @@ public class BackEnd {
 	
 	private PlayerInterface _inter;
 	private ArrayList<Enemies> _enemies;
-	private String[] _names = {"Ploggle", "Macareenie", "Kanzamon", "Rahaii", "Kobe", "Carlee", "Wilson", "Mike", "Krusher99", "Pikachiu"};
+	private String[] _names = {"Joe", "Bob", "Jeff", "Rick", "Robert", "Gustav"};
 	private Player _player;
 	private String _battleLog;
 	
@@ -25,7 +25,7 @@ public class BackEnd {
 	public void createEnemies() {
 		for (int i = 0; i < 5; i ++)
 		{
-			_enemies.add(new Enemies((int)(Math.random()* 800 + 200), (int)(Math.random() * 90 + 10), (int)(Math.random() * 90 + 10), _names[(int)(Math.random() * 10)]));
+			_enemies.add(new Enemies((int)(Math.random()*800+200), (int)(Math.random()*90+10), (int)(Math.random()*90+10), _names[(int)(Math.random()*5+1)]));
 		}
 	}
 	
