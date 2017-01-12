@@ -20,18 +20,10 @@ public class BackEnd {
 		createEnemies();
 	}
 	
-	/*public void createEnemies() {
-		_enemies.add(new Enemies(100, 10, 10, "Bob"));
-		_enemies.add(new Enemies(100, 10, 10, "Charlie"));
-		_enemies.add(new Enemies(100, 10, 10, "Mark"));
-		_enemies.add(new Enemies(100, 10, 10, "Jose"));
-		_enemies.add(new Enemies(100, 10, 10, "Greg"));
-	}*/
-	
 	public void createEnemies() {
 		for (int i = 0; i < 5; i ++)
 		{
-			_enemies.add(new Enemies((int)(Math.random()*999000+1000), (int)(Math.random()*90+10), (int)(Math.random()*90+10), _names[(int)(Math.random()*5+1)]));
+			_enemies.add(new Enemies((int)(Math.random()*800+200), (int)(Math.random()*90+10), (int)(Math.random()*90+10), _names[(int)(Math.random()*5+1)]));
 		}
 	}
 	
