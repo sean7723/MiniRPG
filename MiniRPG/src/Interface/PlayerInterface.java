@@ -2,7 +2,7 @@ package Interface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -63,7 +63,7 @@ public class PlayerInterface implements Runnable {
 		_skillButton = new JButton("Skill");
 		_inventoryButton = new JButton("Inventory");
 		//fourth Row
-		_battleLog = new JLabel("Nothing to Report");
+		_battleLog = new JLabel("Nothing to Report", SwingConstants.CENTER);
 		
 		_model = new BackEnd((String)JOptionPane.showInputDialog("Hello adventurer, what is your name?"), this);
 		update();
