@@ -25,7 +25,7 @@ public class BackEnd {
 	public void createEnemies() {
 		for (int i = 0; i < 5; i ++)
 		{
-			_enemies.add(new Enemies((int)(Math.random()*800+200), (int)(Math.random()*90+10), (int)(Math.random()*90+10), _names[(int)(Math.random()*5+1)]));
+			_enemies.add(new Enemies((int)(Math.random()*9000+200), (int)(Math.random()*200+10), (int)(Math.random()*12+10), _names[(int)(Math.random()*5+1)]));
 		}
 	}
 	
