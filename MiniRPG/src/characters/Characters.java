@@ -14,7 +14,8 @@ public abstract class Characters {
 	
 	
 	public Characters(int health, int attack, int armor, String name) {
-		_health = health;
+		_maxHealth = health;
+		_health = _maxHealth;
 		_attack = attack;
 		_armor = armor;
 		_name = name;
@@ -76,6 +77,10 @@ public abstract class Characters {
 		return _name;
 	}
 	
+	public int getMaxHealth() {
+		return _maxHealth;
+	}
+	
 	public void setHealth(int amount) {
 		_health = amount;
 	}
@@ -87,7 +92,7 @@ public abstract class Characters {
 	}
 	
 	private void addStats(){
-		int health = _health;
+		int health = _maxHealth;
 		int attack = _attack;
 		int armor = _armor;
 		for(int i = 0; i < _equippedItems.size(); i++){
@@ -100,7 +105,7 @@ public abstract class Characters {
 	
 	public void printStats(){
 		System.out.println("Name: " + _name);
-		System.out.println("Health: " + _health);
+		System.out.println("Health: " + _health + " / " + _maxHealth);
 		System.out.println("Attack: " + _attack);
 		System.out.println("Armor: " + _armor);
 	}

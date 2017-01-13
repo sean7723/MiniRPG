@@ -12,7 +12,6 @@ public class BackEnd {
 	private ArrayList<Enemies> _enemies;
 	private String[] _names = { "Joe", "Bob", "Jeff", "Rick", "Robert", "Gustav", "Krusher99" };
 	private Player _player;
-	private String _battleLog;
 	private int _money;
 	private int _round;
 
@@ -32,18 +31,14 @@ public class BackEnd {
 		}
 	}
 
-	public boolean checkKillAll() {
-		boolean isAllDead = true;
-		for (int i = 0; i < _enemies.size(); i++)
-			if (_enemies.get(i).getHealth() > 0)
-				isAllDead = false;
-		return isAllDead;
-	}
-
 	public void newEnemies() {
 		for (int i = _enemies.size() - 1; i >= 0; i--)
 			_enemies.remove(i);
 		createEnemies();
+	}
+	
+	public void restoreHealth() {
+		_player.setHealth(_player.getMaxHealth());
 	}
 
 	public void hit(Enemies target) {
@@ -54,6 +49,7 @@ public class BackEnd {
 
 		if (checkKillAll()) {
 			newEnemies();
+			restoreHealth();
 			_round++;
 		}
 
@@ -68,6 +64,22 @@ public class BackEnd {
 	public void checkKill(Enemies enemy) {
 		if (enemy.getHealth() == 0) {
 			_money += 100;
+		}
+	}
+	
+	public boolean checkKillAll() {
+		boolean isAllDead = true;
+		for (int i = 0; i < _enemies.size(); i++)
+			if (_enemies.get(i).getHealth() > 0)
+				isAllDead = false;
+		return isAllDead;
+	}
+	
+	public void toggleWindow(int windowNumber) {
+		switch (windowNumber) {
+			case 1: _inter.toggleStore();
+			break;
+			default: break;
 		}
 	}
 
