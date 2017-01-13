@@ -10,7 +10,7 @@ public class Healing extends SelfBuffs {
 	@Override
 	public boolean use() {
 		if(_remainingCharges > 0) {
-			_caster.setHealth(_caster.getHealth() + 100);
+			_caster.addHealth(100);
 			_remainingCharges--;
 			return true;
 		}

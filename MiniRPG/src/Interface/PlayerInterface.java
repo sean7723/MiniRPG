@@ -24,7 +24,7 @@ public class PlayerInterface implements Runnable {
 	private JLabel _playerInt3;
 	private JLabel _playerInt4;
 	private JLabel _playerInt5;
-	private JLabel _battleLog;
+	private JLabel _gameName;
 	private JButton _hitButton;
 	private JButton _skillButton;
 	private JButton _inventoryButton;
@@ -63,7 +63,7 @@ public class PlayerInterface implements Runnable {
 		_skillButton = new JButton("Skill");
 		_inventoryButton = new JButton("Inventory");
 		//fourth Row
-		_battleLog = new JLabel("Nothing to Report", SwingConstants.CENTER);
+		_gameName = new JLabel("- Fun Adventures -", SwingConstants.CENTER);
 		
 		_model = new BackEnd((String)JOptionPane.showInputDialog("Hello adventurer, what is your name?"), this);
 		update();
@@ -98,7 +98,7 @@ public class PlayerInterface implements Runnable {
 		_panel2.add(_target4);
 		_panel2.add(_target5);
 		//third row
-		_panel3.add(_battleLog);
+		_panel3.add(_gameName);
 		//fourth row
 		_panel4.add(_playerInt1);
 		_panel4.add(_playerInt2);
@@ -143,10 +143,9 @@ public class PlayerInterface implements Runnable {
 						"<br />Attack: " + _model.getEnemy5().getAttack() +
 						"<br />Armor: " + _model.getEnemy5().getArmor() + "</html>"
 						);
-		_playerInt1.setText(_model.getPlayer().getName());
+		_playerInt1.setText("<html>" + _model.getPlayer().getName() + "<br /> Balance: " + _model.getMoney() + "<br /> Round: " + _model.getRound() + "</html>");
 		_playerInt2.setText("<html>Health: " + _model.getPlayer().getHealth() + 
 							"<br />Attack: " + _model.getPlayer().getAttack() +
 							"<br />Armor: " + _model.getPlayer().getArmor() + "</html>");
-		_battleLog.setText(_model.getBattleLog());
 	}
 }

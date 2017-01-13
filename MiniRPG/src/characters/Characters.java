@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import item.*;
 public abstract class Characters {
 	
+	private int _maxHealth;
 	private int _health;
 	private int _attack;
 	private int _armor;
@@ -77,6 +78,12 @@ public abstract class Characters {
 	
 	public void setHealth(int amount) {
 		_health = amount;
+	}
+	
+	public void addHealth(int amount) {
+		_health += amount;
+		if(_health > _maxHealth)
+			_health = _maxHealth;
 	}
 	
 	private void addStats(){
