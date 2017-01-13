@@ -6,8 +6,8 @@ public abstract class Equipable extends Item {
 	private int _armor;
 	private int _attack;
 	
-	public Equipable(String name) {
-		super(name);
+	public Equipable(String name, int price) {
+		super(name, price);
 	}
 
 	public int getHealth() {

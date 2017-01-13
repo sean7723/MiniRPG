@@ -30,6 +30,15 @@ public class PlayerInterface implements Runnable {
 	private JButton _inventoryButton;
 	private JButton _storeButton;
 	private JButton _storeCloseButton;
+	private JButton _storePurchase1;
+	private JButton _storePurchase2;
+	private JButton _storePurchase3;
+	private JButton _storePurchase4;
+	private JButton _storePurchase5;
+	private JButton _storePurchase6;
+	private JButton _storePurchase7;
+	private JButton _storePurchase8;
+	private JButton _storePurchase9;
 	private JButton _target1;
 	private JButton _target2;
 	private JButton _target3;
@@ -41,34 +50,45 @@ public class PlayerInterface implements Runnable {
 	private JPanel _panel4;
 
 	public PlayerInterface() {
-		_storeFrame = new JFrame("Fun Adventures Store");
+		// Main window
 		_frame = new JFrame("Fun Adventures");
 		_panel1 = new JPanel();
 		_panel2 = new JPanel();
 		_panel3 = new JPanel();
 		_panel4 = new JPanel();
-		// first row
+		// Main window first row
 		_enemy1 = new JLabel("Hello");
 		_enemy2 = new JLabel("Hello");
 		_enemy3 = new JLabel("Hello");
 		_enemy4 = new JLabel("Hello");
 		_enemy5 = new JLabel("Hello");
-		// second row
+		// Main window second row
 		_target1 = new JButton("Target");
 		_target2 = new JButton("Target");
 		_target3 = new JButton("Target");
 		_target4 = new JButton("Target");
 		_target5 = new JButton("Target");
-		// third Row
+		// Main window third Row
 		_gameName = new JLabel("- Fun Adventures -", SwingConstants.CENTER);
-		// fourth row
+		// Main window fourth row
 		_playerInt1 = new JLabel("temp");
 		_playerInt2 = new JLabel("temp");
 		_hitButton = new JButton("Hit");
 		_skillButton = new JButton("Skill");
 		_inventoryButton = new JButton("Inventory");
 		_storeButton = new JButton("Open Store");
+		//Store Window
+		_storeFrame = new JFrame("Fun Adventures Store");
 		_storeCloseButton = new JButton("Close Store");
+		_storePurchase1 = new JButton("Purchase Potion");
+		_storePurchase2 = new JButton("Purchase Stone Sword");
+		_storePurchase3 = new JButton("Purchase Iron Sword");
+		_storePurchase4 = new JButton("Purchase Gold Sword");
+		_storePurchase5 = new JButton("Purchase Diamond Sword");
+		_storePurchase6 = new JButton("Purchase Stone Chestplate");
+		_storePurchase7 = new JButton("Purchase Iron Chestplate");
+		_storePurchase8 = new JButton("Purchase Gold Chestplate");
+		_storePurchase9 = new JButton("Purchase Diamond Chestplate");
 
 		_model = new BackEnd((String) JOptionPane.showInputDialog("Hello adventurer, what is your name?"), this);
 		update();
@@ -80,7 +100,7 @@ public class PlayerInterface implements Runnable {
 
 	@Override
 	public void run() {
-		// General Frame
+		// Main game Window
 		_frame.getContentPane().setLayout(new GridLayout(4, 1));
 		_panel1.setLayout(new GridLayout(1, 5));
 		_panel2.setLayout(new GridLayout(1, 5));
@@ -90,21 +110,21 @@ public class PlayerInterface implements Runnable {
 		_frame.add(_panel2);
 		_frame.add(_panel3);
 		_frame.add(_panel4);
-		// first row
+		// Main game first row
 		_panel1.add(_enemy1);
 		_panel1.add(_enemy2);
 		_panel1.add(_enemy3);
 		_panel1.add(_enemy4);
 		_panel1.add(_enemy5);
-		// second row
+		// Main game second row
 		_panel2.add(_target1);
 		_panel2.add(_target2);
 		_panel2.add(_target3);
 		_panel2.add(_target4);
 		_panel2.add(_target5);
-		// third row
+		// Main game third row
 		_panel3.add(_gameName);
-		// fourth row
+		// Main game fourth row
 		_panel4.add(_playerInt1);
 		_panel4.add(_playerInt2);
 		_panel4.add(_storeButton);
@@ -119,8 +139,42 @@ public class PlayerInterface implements Runnable {
 
 		_storeButton.addActionListener(new EventHandlerChangeWindows(_model, 1));
 		_storeCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 1));
-
+		
+		_storePurchase2.addActionListener(new EventHandlerMakePurchase(_model, 2));
+		_storePurchase3.addActionListener(new EventHandlerMakePurchase(_model, 3));
+		_storePurchase4.addActionListener(new EventHandlerMakePurchase(_model, 4));
+		_storePurchase5.addActionListener(new EventHandlerMakePurchase(_model, 5));
+		_storePurchase6.addActionListener(new EventHandlerMakePurchase(_model, 6));
+		_storePurchase7.addActionListener(new EventHandlerMakePurchase(_model, 7));
+		_storePurchase8.addActionListener(new EventHandlerMakePurchase(_model, 8));
+		_storePurchase9.addActionListener(new EventHandlerMakePurchase(_model, 9));
+		
+		//Store window
+		_storeFrame.getContentPane().setLayout(new GridLayout(4, 5));
+		//Store first Row
+		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("Temp"));
+		//Store second Row
+		_storeFrame.add(_storePurchase1);
+		_storeFrame.add(_storePurchase2);
+		_storeFrame.add(_storePurchase3);
+		_storeFrame.add(_storePurchase4);
+		_storeFrame.add(_storePurchase5);
+		//Store third row
+		_storeFrame.add(new JLabel("Balance: " + _model.getMoney()));
+		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("Temp"));
+		//Store fourth row
 		_storeFrame.add(_storeCloseButton);
+		_storeFrame.add(_storePurchase6);
+		_storeFrame.add(_storePurchase7);
+		_storeFrame.add(_storePurchase8);
+		_storeFrame.add(_storePurchase9);
 
 		_storeFrame.pack();
 		_storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

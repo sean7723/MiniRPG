@@ -7,8 +7,8 @@ public abstract class Consumable extends Item {
 	private Characters _owner;
 	private int _health;
 	
-	public Consumable(String name, int health, Characters owner) {
-		super(name);
+	public Consumable(String name, int health, int price, Characters owner) {
+		super(name, price);
 		_owner = owner;
 		_health = health;
 	}
