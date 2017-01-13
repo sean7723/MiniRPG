@@ -10,14 +10,15 @@ public class BackEnd {
 
 	private PlayerInterface _inter;
 	private ArrayList<Enemies> _enemies;
-	private String[] _names = { "Joe", "Bob", "Jeff", "Rick", "Robert", "Gustav", "Krusher99" };
+	private String[] _names = { "Joe", "Bob", "Jeff", "Rick", "Robert", "Gustav", "Krusher99", "Pikachiu"};
 	private Player _player;
 	private int _money;
 	private int _round;
 
 	public BackEnd(String name, PlayerInterface inter) {
 		_enemies = new ArrayList<Enemies>();
-		_player = new Player(10000, 10000, 10000, name);
+		_player = new Player(name);
+		_player.addHealth(_player.getMaxHealth());
 		_inter = inter;
 		_money = 100;
 		_round = 0;
@@ -38,7 +39,7 @@ public class BackEnd {
 	}
 	
 	public void restoreHealth() {
-		_player.setHealth(_player.getMaxHealth());
+		_player.addHealth(_player.getMaxHealth());
 	}
 
 	public void hit(Enemies target) {

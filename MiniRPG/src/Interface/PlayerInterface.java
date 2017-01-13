@@ -68,7 +68,7 @@ public class PlayerInterface implements Runnable {
 		_skillButton = new JButton("Skill");
 		_inventoryButton = new JButton("Inventory");
 		_storeButton = new JButton("Open Store");
-		_storeCloseButton = new JButton("Open Store");
+		_storeCloseButton = new JButton("Close Store");
 
 		_model = new BackEnd((String) JOptionPane.showInputDialog("Hello adventurer, what is your name?"), this);
 		update();
@@ -123,7 +123,7 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.add(_storeCloseButton);
 
 		_storeFrame.pack();
-		_storeFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		_storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		_frame.pack();
 		_frame.setVisible(true);
@@ -156,11 +156,9 @@ public class PlayerInterface implements Runnable {
 	public void toggleStore() {
 		if (_storeFrame.isVisible()) {
 			_storeButton.setText("Open Store");
-			_storeCloseButton.setText("Open Store");
 			_storeFrame.setVisible(false);
 		} else {
 			_storeButton.setText("Close Store");
-			_storeCloseButton.setText("Close Store");
 			_storeFrame.setVisible(true);
 		}
 	}

@@ -30,6 +30,6 @@ public abstract class Consumable extends Item {
 	}
 
 	public void use(){
-		_owner.setHealth(_owner.getHealth() + _health);
+		_owner.addHealth(_health);
 	}
 }

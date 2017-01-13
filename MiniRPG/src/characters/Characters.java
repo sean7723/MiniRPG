@@ -9,9 +9,6 @@ public abstract class Characters {
 	private int _attack;
 	private int _armor;
 	private String _name;
-	private ArrayList<Item> _inventory;
-	private ArrayList<Equipable> _equippedItems;
-	
 	
 	public Characters(int health, int attack, int armor, String name) {
 		_maxHealth = health;
@@ -19,21 +16,19 @@ public abstract class Characters {
 		_attack = attack;
 		_armor = armor;
 		_name = name;
-		_inventory = new ArrayList<Item>();
-		_equippedItems = new ArrayList<Equipable>();
 	}
 	
 	public boolean hit(Characters c) {
 		if(_health > 0) {
-			int damageDone = (int)((Math.random() * (_attack * 0.1) * 2) + 1) + (_attack - (int)(_attack * 0.2)) ;
+			int damageDone = (int)((Math.random() * (_attack * 0.1) * 2) + 1) + (_attack - (int)(_attack * 0.2));
 			if(c.getHealth() <= 0)
 				return false;
 			if(c.getHealth() - damageDone <= 0) {
-				c.setHealth(0);
+				c._health = 0;
 				return true;
 			}
 			else {
-				c.setHealth(c.getHealth() - damageDone);
+				c._health = c._health - damageDone;
 				return true;
 			}
 		}
@@ -45,20 +40,15 @@ public abstract class Characters {
 			if(c.getHealth() <= 0)
 				return false;
 			if(c.getHealth() - amount <= 0) {
-				c.setHealth(0);
+				c._health = 0;
 				return true;
 			}
 			else {
-				c.setHealth(c.getHealth() - amount);
+				c._health = c._health - amount;
 				return true;
 			}
 		}
 		return false;
-	}
-	
-	public void equipItem(Equipable e){
-		_equippedItems.add(e);
-		addStats();
 	}
 	
 	public int getArmor() {
@@ -81,26 +71,22 @@ public abstract class Characters {
 		return _maxHealth;
 	}
 	
-	public void setHealth(int amount) {
-		_health = amount;
+	public void setMaxHealth(int amount) {
+		_maxHealth = amount;
+	}
+	
+	public void setAttack(int amount) {
+		_attack = amount;
+	}
+	
+	public void setArmor(int amount) {
+		_armor = amount;
 	}
 	
 	public void addHealth(int amount) {
 		_health += amount;
 		if(_health > _maxHealth)
 			_health = _maxHealth;
-	}
-	
-	private void addStats(){
-		int health = _maxHealth;
-		int attack = _attack;
-		int armor = _armor;
-		for(int i = 0; i < _equippedItems.size(); i++){
-			attack += _equippedItems.get(i).getAttack();
-			armor += _equippedItems.get(i).getArmor();
-		}
-		_attack = attack;
-		_armor = armor;
 	}
 	
 	public void printStats(){
