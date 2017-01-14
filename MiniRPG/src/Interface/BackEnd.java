@@ -169,6 +169,10 @@ public class BackEnd {
 			break;
 		}
 	}
+	
+	public Equipable getStoreEquip(int itemNum) {
+		return (Equipable)(_store.get(itemNum));
+	}
 
 	public Enemies getEnemy(int position) {
 		return _enemies.get(position);

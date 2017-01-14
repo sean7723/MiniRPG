@@ -25,6 +25,7 @@ public class PlayerInterface implements Runnable {
 	private JLabel _playerInt4;
 	private JLabel _playerInt5;
 	private JLabel _gameName;
+	private JLabel _storeBalance;
 	private JButton _hitButton;
 	private JButton _skillButton;
 	private JButton _inventoryButton;
@@ -89,6 +90,7 @@ public class PlayerInterface implements Runnable {
 		_storePurchase7 = new JButton("Purchase Iron Chestplate");
 		_storePurchase8 = new JButton("Purchase Gold Chestplate");
 		_storePurchase9 = new JButton("Purchase Diamond Chestplate");
+		_storeBalance = new JLabel("");
 
 		_model = new BackEnd((String) JOptionPane.showInputDialog("Hello adventurer, what is your name?"), this);
 		update();
@@ -153,10 +155,14 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.getContentPane().setLayout(new GridLayout(4, 5));
 		//Store first Row
 		_storeFrame.add(new JLabel("Temp"));
-		_storeFrame.add(new JLabel("Temp"));
-		_storeFrame.add(new JLabel("Temp"));
-		_storeFrame.add(new JLabel("Temp"));
-		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(1).getName() +
+									"<br /> Attack: " + _model.getStoreEquip(1).getAttack() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(2).getName() + 
+									"<br /> Attack: " + _model.getStoreEquip(2).getAttack() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(3).getName() + 
+									"<br /> Attack: " + _model.getStoreEquip(3).getAttack() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(4).getName() + 
+									"<br /> Attack: " + _model.getStoreEquip(4).getAttack() + "</html>"));
 		//Store second Row
 		_storeFrame.add(_storePurchase1);
 		_storeFrame.add(_storePurchase2);
@@ -164,11 +170,19 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.add(_storePurchase4);
 		_storeFrame.add(_storePurchase5);
 		//Store third row
-		_storeFrame.add(new JLabel("Balance: " + _model.getMoney()));
-		_storeFrame.add(new JLabel("Temp"));
-		_storeFrame.add(new JLabel("Temp"));
-		_storeFrame.add(new JLabel("Temp"));
-		_storeFrame.add(new JLabel("Temp"));
+		_storeFrame.add(_storeBalance);
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(5).getName() + 
+									"<br /> Health: " + _model.getStoreEquip(5).getHealth() + 
+									"<br/> Armor: " + _model.getStoreEquip(5).getArmor() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(6).getName() + 
+									"<br /> Health: " + _model.getStoreEquip(6).getHealth() + 
+									"<br/> Armor: " + _model.getStoreEquip(6).getArmor() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(7).getName() + 
+									"<br /> Health: " + _model.getStoreEquip(7).getHealth() + 
+									"<br/> Armor: " + _model.getStoreEquip(7).getArmor() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(8).getName() + 
+									"<br /> Health: " + _model.getStoreEquip(8).getHealth() + 
+									"<br/> Armor: " + _model.getStoreEquip(8).getArmor() + "</html>"));
 		//Store fourth row
 		_storeFrame.add(_storeCloseButton);
 		_storeFrame.add(_storePurchase6);
@@ -205,6 +219,7 @@ public class PlayerInterface implements Runnable {
 		_playerInt2.setText("<html>Health: " + _model.getPlayer().getHealth() + " / "
 				+ _model.getPlayer().getMaxHealth() + "<br />Attack: " + _model.getPlayer().getAttack()
 				+ "<br />Armor: " + _model.getPlayer().getArmor() + "</html>");
+		_storeBalance.setText("Balance: " + _model.getMoney());
 	}
 
 	public void toggleStore() {
