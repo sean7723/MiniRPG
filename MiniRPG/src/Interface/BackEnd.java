@@ -29,7 +29,7 @@ public class BackEnd {
 	
 	public void createStore() {
 		_store = new ArrayList<Item>();
-		_store.add(null); //Consumable
+		_store.add(new HealthPotion(100, 50, _player)); //Consumable
 		_store.add(new Sword("Stone Sword", 500, 2500));
 		_store.add(new Sword("Iron Sword", 1000, 5000));
 		_store.add(new Sword("Gold Sword", 2000, 7500));
@@ -96,7 +96,7 @@ public class BackEnd {
 		switch (itemNum) {
 		case 1: 
 			if(_money - _store.get(0).getPrice() >= 0){
-				// Put Consumable in Inventory
+				_player.putConsumableInInventory((Consumable)_store.get(0));
 				_money -= _store.get(0).getPrice();
 				_inter.update();
 			}
@@ -168,6 +168,10 @@ public class BackEnd {
 		default:
 			break;
 		}
+	}
+	
+	public Consumable getStoreConsumable(int itemNum) {
+		return (Consumable)_store.get(itemNum);
 	}
 	
 	public Equipable getStoreEquip(int itemNum) {

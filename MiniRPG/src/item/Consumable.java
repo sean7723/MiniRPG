@@ -29,7 +29,5 @@ public abstract class Consumable extends Item {
 		_health = health;
 	}
 
-	public void use(){
-		_owner.addHealth(_health);
-	}
+	public abstract void use();
 }
