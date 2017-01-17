@@ -14,6 +14,7 @@ public class PlayerInterface implements Runnable {
 	private BackEnd _model;
 	private JFrame _frame;
 	private JFrame _storeFrame;
+	private JFrame _inventoryFrame;
 	private JLabel _enemy1;
 	private JLabel _enemy2;
 	private JLabel _enemy3;
@@ -26,6 +27,8 @@ public class PlayerInterface implements Runnable {
 	private JLabel _playerInt5;
 	private JLabel _gameName;
 	private JLabel _storeBalance;
+	private JLabel _inventoryBalance;
+	private JLabel _consumableInformation1;
 	private JButton _hitButton;
 	private JButton _skillButton;
 	private JButton _inventoryButton;
@@ -40,6 +43,8 @@ public class PlayerInterface implements Runnable {
 	private JButton _storePurchase7;
 	private JButton _storePurchase8;
 	private JButton _storePurchase9;
+	private JButton _inventoryCloseButton;
+	private JButton _inventoryUse1;
 	private JButton _target1;
 	private JButton _target2;
 	private JButton _target3;
@@ -76,9 +81,9 @@ public class PlayerInterface implements Runnable {
 		_playerInt2 = new JLabel("temp");
 		_hitButton = new JButton("Hit");
 		_skillButton = new JButton("Skill");
-		_inventoryButton = new JButton("Inventory");
+		_inventoryButton = new JButton("Open Inventory");
 		_storeButton = new JButton("Open Store");
-		//Store Window
+		// Store Window
 		_storeFrame = new JFrame("Fun Adventures Store");
 		_storeCloseButton = new JButton("Close Store");
 		_storePurchase1 = new JButton("Purchase Potion");
@@ -91,6 +96,13 @@ public class PlayerInterface implements Runnable {
 		_storePurchase8 = new JButton("Purchase Gold Chestplate");
 		_storePurchase9 = new JButton("Purchase Diamond Chestplate");
 		_storeBalance = new JLabel("");
+		
+		//Inventory Window
+		_inventoryFrame = new JFrame("Inventory");
+		_inventoryCloseButton = new JButton("Close Inventory");
+		_inventoryUse1 = new JButton("Use Health Potion");
+		_inventoryBalance = new JLabel("");
+		_consumableInformation1 = new JLabel("");
 
 		_model = new BackEnd((String) JOptionPane.showInputDialog("Hello adventurer, what is your name?"), this);
 		update();
@@ -132,7 +144,8 @@ public class PlayerInterface implements Runnable {
 		_panel4.add(_storeButton);
 		_panel4.add(_skillButton);
 		_panel4.add(_inventoryButton);
-
+		
+		//Buttons
 		_target1.addActionListener(new EventHandlerAttack(_model, 0));
 		_target2.addActionListener(new EventHandlerAttack(_model, 1));
 		_target3.addActionListener(new EventHandlerAttack(_model, 2));
@@ -141,7 +154,7 @@ public class PlayerInterface implements Runnable {
 
 		_storeButton.addActionListener(new EventHandlerChangeWindows(_model, 1));
 		_storeCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 1));
-		
+
 		_storePurchase1.addActionListener(new EventHandlerMakePurchase(_model, 1));
 		_storePurchase2.addActionListener(new EventHandlerMakePurchase(_model, 2));
 		_storePurchase3.addActionListener(new EventHandlerMakePurchase(_model, 3));
@@ -152,54 +165,65 @@ public class PlayerInterface implements Runnable {
 		_storePurchase8.addActionListener(new EventHandlerMakePurchase(_model, 8));
 		_storePurchase9.addActionListener(new EventHandlerMakePurchase(_model, 9));
 		
-		//Store window
+		_inventoryButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
+		_inventoryCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
+		_inventoryUse1.addActionListener(new EventHandlerUseConsumable(_model, "Health Potion"));
+
+		// Store window
 		_storeFrame.getContentPane().setLayout(new GridLayout(4, 5));
-		//Store first Row
-		_storeFrame.add(new JLabel("<html> Name: Health Potion "
-				+ "					<br /> Health: " + _model.getStoreConsumable(0).getHealth() +
-									"<br/> Price: " + _model.getStoreConsumable(0).getPrice()));
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(1).getName() +
-									"<br /> Attack: " + _model.getStoreEquip(1).getAttack() + 
-									"<br /> Price: " + _model.getStoreEquip(1).getPrice() + "</html>"));
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(2).getName() + 
-									"<br /> Attack: " + _model.getStoreEquip(2).getAttack() + 
-									"<br /> Price: " + _model.getStoreEquip(2).getPrice() + "</html>"));
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(3).getName() + 
-									"<br /> Attack: " + _model.getStoreEquip(3).getAttack() + 
-									"<br /> Price: " + _model.getStoreEquip(3).getPrice() + "</html>"));
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(4).getName() + 
-									"<br /> Attack: " + _model.getStoreEquip(4).getAttack() + 
-									"<br /> Price: " + _model.getStoreEquip(4).getPrice() + "</html>"));
-		//Store second Row
+		// Store first Row
+		_storeFrame.add(new JLabel("<html> Name: Health Potion " + "					<br /> Health: "
+				+ _model.getStoreConsumable(0).getHealth() + "<br/> Price: "
+				+ _model.getStoreConsumable(0).getPrice()));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(1).getName() + "<br /> Attack: "
+				+ _model.getStoreEquip(1).getAttack() + "<br /> Price: " + _model.getStoreEquip(1).getPrice()
+				+ "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(2).getName() + "<br /> Attack: "
+				+ _model.getStoreEquip(2).getAttack() + "<br /> Price: " + _model.getStoreEquip(2).getPrice()
+				+ "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(3).getName() + "<br /> Attack: "
+				+ _model.getStoreEquip(3).getAttack() + "<br /> Price: " + _model.getStoreEquip(3).getPrice()
+				+ "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(4).getName() + "<br /> Attack: "
+				+ _model.getStoreEquip(4).getAttack() + "<br /> Price: " + _model.getStoreEquip(4).getPrice()
+				+ "</html>"));
+		// Store second Row
 		_storeFrame.add(_storePurchase1);
 		_storeFrame.add(_storePurchase2);
 		_storeFrame.add(_storePurchase3);
 		_storeFrame.add(_storePurchase4);
 		_storeFrame.add(_storePurchase5);
-		//Store third row
+		// Store third row
 		_storeFrame.add(_storeBalance);
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(5).getName() + 
-									"<br /> Health: " + _model.getStoreEquip(5).getHealth() + 
-									"<br/> Armor: " + _model.getStoreEquip(5).getArmor() + 
-									"<br /> Price: " + _model.getStoreEquip(5).getPrice() + "</html>"));
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(6).getName() + 
-									"<br /> Health: " + _model.getStoreEquip(6).getHealth() + 
-									"<br/> Armor: " + _model.getStoreEquip(6).getArmor() + 
-									"<br /> Price: " + _model.getStoreEquip(6).getPrice() + "</html>"));
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(7).getName() + 
-									"<br /> Health: " + _model.getStoreEquip(7).getHealth() + 
-									"<br/> Armor: " + _model.getStoreEquip(7).getArmor() +
-									"<br /> Price: " + _model.getStoreEquip(7).getPrice() + "</html>"));
-		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(8).getName() + 
-									"<br /> Health: " + _model.getStoreEquip(8).getHealth() + 
-									"<br/> Armor: " + _model.getStoreEquip(8).getArmor() +
-									"<br /> Price: " + _model.getStoreEquip(8).getPrice() + "</html>"));
-		//Store fourth row
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(5).getName() + "<br /> Health: "
+				+ _model.getStoreEquip(5).getHealth() + "<br/> Armor: " + _model.getStoreEquip(5).getArmor()
+				+ "<br /> Price: " + _model.getStoreEquip(5).getPrice() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(6).getName() + "<br /> Health: "
+				+ _model.getStoreEquip(6).getHealth() + "<br/> Armor: " + _model.getStoreEquip(6).getArmor()
+				+ "<br /> Price: " + _model.getStoreEquip(6).getPrice() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(7).getName() + "<br /> Health: "
+				+ _model.getStoreEquip(7).getHealth() + "<br/> Armor: " + _model.getStoreEquip(7).getArmor()
+				+ "<br /> Price: " + _model.getStoreEquip(7).getPrice() + "</html>"));
+		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(8).getName() + "<br /> Health: "
+				+ _model.getStoreEquip(8).getHealth() + "<br/> Armor: " + _model.getStoreEquip(8).getArmor()
+				+ "<br /> Price: " + _model.getStoreEquip(8).getPrice() + "</html>"));
+		// Store fourth row
 		_storeFrame.add(_storeCloseButton);
 		_storeFrame.add(_storePurchase6);
 		_storeFrame.add(_storePurchase7);
 		_storeFrame.add(_storePurchase8);
 		_storeFrame.add(_storePurchase9);
+		
+		// Inventory Window
+		_inventoryFrame.getContentPane().setLayout(new GridLayout(2, 2));
+		//Inventory First Row
+		_inventoryFrame.add(_inventoryBalance);
+		_inventoryFrame.add(_consumableInformation1);
+		_inventoryFrame.add(_inventoryCloseButton);
+		_inventoryFrame.add(_inventoryUse1);
+		
+		_inventoryFrame.pack();
+		_inventoryFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		_storeFrame.pack();
 		_storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -231,6 +255,8 @@ public class PlayerInterface implements Runnable {
 				+ _model.getPlayer().getMaxHealth() + "<br />Attack: " + _model.getPlayer().getAttack()
 				+ "<br />Armor: " + _model.getPlayer().getArmor() + "</html>");
 		_storeBalance.setText("Balance: " + _model.getMoney());
+		_inventoryBalance.setText("Balance: " + _model.getMoney());
+		_consumableInformation1.setText("<html>" + _model.getStoreConsumable(0).getName() + "<br /> Healing: " + _model.getStoreConsumable(0).getHealth() + "<br /> Amount: " + _model.getAmountOfItemInInventory(_model.getStoreConsumable(0).getName()) + "</html>");
 	}
 
 	public void toggleStore() {
@@ -240,6 +266,16 @@ public class PlayerInterface implements Runnable {
 		} else {
 			_storeButton.setText("Close Store");
 			_storeFrame.setVisible(true);
+		}
+	}
+	
+	public void toggleInventory() {
+		if (_inventoryFrame.isVisible()) {
+			_inventoryButton.setText("Open Iventory");
+			_inventoryFrame.setVisible(false);
+		} else {
+			_inventoryButton.setText("Close Inventory");
+			_inventoryFrame.setVisible(true);
 		}
 	}
 }

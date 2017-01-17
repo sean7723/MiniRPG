@@ -8,7 +8,11 @@ public class HealthPotion extends Consumable {
 		super("Health Potion", health, price, owner);
 	}
 	
-	public void use() {
-		getOwner().addHealth(getHealth());
+	public boolean use() {
+		if(getOwner().getHealth() != getOwner().getMaxHealth()) {
+			getOwner().addHealth(getHealth());
+			return true;
+		}
+		return false;
 	}
 }

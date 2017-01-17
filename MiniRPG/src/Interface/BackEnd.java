@@ -22,14 +22,14 @@ public class BackEnd {
 		_player.addHealth(_player.getMaxHealth());
 		_inter = inter;
 		_money = 10000000;
-		_round = 0;
+		_round = 1;
 		createStore();
 		createEnemies();
 	}
-	
+
 	public void createStore() {
 		_store = new ArrayList<Item>();
-		_store.add(new HealthPotion(100, 50, _player)); //Consumable
+		_store.add(new HealthPotion(100, 50, _player)); // Consumable
 		_store.add(new Sword("Stone Sword", 500, 2500));
 		_store.add(new Sword("Iron Sword", 1000, 5000));
 		_store.add(new Sword("Gold Sword", 2000, 7500));
@@ -42,9 +42,9 @@ public class BackEnd {
 
 	public void createEnemies() {
 		for (int i = 0; i < 5; i++) {
-			_enemies.add(new Enemies((int) (Math.random() * 800 + (200 * (_round / 5 + 1))),
-					(int) (Math.random() * 60 + (10 * (_round / 5 + 1))),
-					(int) (Math.random() * 12 + (10 * (_round / 5 + 1))), _names[(int) (Math.random() * 6 + 1)]));
+			_enemies.add(new Enemies((int) (Math.random() * 800 + (200 * (_round / 5))),
+					(int) (Math.random() * 60 + (10 * (_round / 5))),
+					(int) (Math.random() * 12 + (10 * (_round / 5))), _names[(int) (Math.random() * 6 + 1)]));
 		}
 	}
 
@@ -94,69 +94,82 @@ public class BackEnd {
 
 	public void purchaseItem(int itemNum) {
 		switch (itemNum) {
-		case 1: 
-			if(_money - _store.get(0).getPrice() >= 0){
-				_player.putConsumableInInventory((Consumable)_store.get(0));
+		case 1:
+			if (_money - _store.get(0).getPrice() >= 0) {
+				_player.putConsumableInInventory((Consumable) _store.get(0));
 				_money -= _store.get(0).getPrice();
 				_inter.update();
 			}
 			break;
 		case 2:
-			if(_money - _store.get(1).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(1));
+			if (_money - _store.get(1).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(1));
 				_money -= _store.get(1).getPrice();
 				_inter.update();
 			}
 			break;
 		case 3:
-			if(_money - _store.get(2).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(2));
+			if (_money - _store.get(2).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(2));
 				_money -= _store.get(2).getPrice();
 				_inter.update();
 			}
 			break;
 		case 4:
-			if(_money - _store.get(3).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(3));
+			if (_money - _store.get(3).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(3));
 				_money -= _store.get(3).getPrice();
 				_inter.update();
 			}
 			break;
 		case 5:
-			if(_money - _store.get(4).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(4));
+			if (_money - _store.get(4).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(4));
 				_money -= _store.get(4).getPrice();
 				_inter.update();
 			}
 			break;
 		case 6:
-			if(_money - _store.get(5).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(5));
+			if (_money - _store.get(5).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(5));
 				_money -= _store.get(5).getPrice();
 				_inter.update();
 			}
 			break;
 		case 7:
-			if(_money - _store.get(6).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(6));
+			if (_money - _store.get(6).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(6));
 				_money -= _store.get(6).getPrice();
 				_inter.update();
 			}
 			break;
 		case 8:
-			if(_money - _store.get(7).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(7));
+			if (_money - _store.get(7).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(7));
 				_money -= _store.get(7).getPrice();
 				_inter.update();
 			}
 			break;
 		case 9:
-			if(_money - _store.get(8).getPrice() >= 0) {
-				_player.equipItem((Equipable)_store.get(8));
+			if (_money - _store.get(8).getPrice() >= 0) {
+				_player.equipItem((Equipable) _store.get(8));
 				_money -= _store.get(8).getPrice();
 				_inter.update();
 			}
 			break;
+		}
+	}
+	
+	public void useConsumable(String name) {
+		for(int i = 0; i < _player.getInventory().size(); i++) {
+			if(_player.getInventory().get(i).getName().equals(name)) {
+				if(_player.getInventory().get(i).use()) {
+					_player.getInventory().remove(i);
+					_inter.update();
+					return;
+				}
+					
+			}
 		}
 	}
 
@@ -165,17 +178,29 @@ public class BackEnd {
 		case 1:
 			_inter.toggleStore();
 			break;
+		case 2:
+			_inter.toggleInventory();
+			break;
 		default:
 			break;
 		}
 	}
 	
-	public Consumable getStoreConsumable(int itemNum) {
-		return (Consumable)_store.get(itemNum);
+	public int getAmountOfItemInInventory(String name) {
+		ArrayList<Consumable> inventory = _player.getInventory();
+		int amount = 0;
+		for(Consumable item : inventory)
+			if(item.getName().equals(name))
+				amount++;
+		return amount;
 	}
-	
+
+	public Consumable getStoreConsumable(int itemNum) {
+		return (Consumable) _store.get(itemNum);
+	}
+
 	public Equipable getStoreEquip(int itemNum) {
-		return (Equipable)(_store.get(itemNum));
+		return (Equipable) (_store.get(itemNum));
 	}
 
 	public Enemies getEnemy(int position) {
@@ -211,6 +236,6 @@ public class BackEnd {
 	}
 
 	public int getRound() {
-		return _round + 1;
+		return _round;
 	}
 }

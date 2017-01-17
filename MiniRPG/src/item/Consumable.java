@@ -6,28 +6,28 @@ public abstract class Consumable extends Item {
 
 	private Characters _owner;
 	private int _health;
-	
+
 	public Consumable(String name, int health, int price, Characters owner) {
 		super(name, price);
 		_owner = owner;
 		_health = health;
 	}
-	
-	public Characters getOwner(){
+
+	public Characters getOwner() {
 		return _owner;
 	}
-	
-	public int getHealth(){
+
+	public int getHealth() {
 		return _health;
 	}
-	
-	public void setOwner(Characters owner){
+
+	public void setOwner(Characters owner) {
 		_owner = owner;
 	}
-	
-	public void setHealth(int health){
+
+	public void setHealth(int health) {
 		_health = health;
 	}
 
-	public abstract void use();
+	public abstract boolean use();
 }

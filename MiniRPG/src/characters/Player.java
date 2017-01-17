@@ -25,7 +25,7 @@ public class Player extends Characters {
 		_equippedItems.add(e);
 		addStats(e);
 	}
-	
+
 	public void putConsumableInInventory(Consumable c) {
 		_inventory.add(c);
 	}
@@ -40,5 +40,9 @@ public class Player extends Characters {
 		setMaxHealth(health);
 		setAttack(attack);
 		setArmor(armor);
+	}
+	
+	public ArrayList<Consumable> getInventory() {
+		return _inventory;
 	}
 }
