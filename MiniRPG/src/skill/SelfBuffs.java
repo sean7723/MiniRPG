@@ -4,12 +4,11 @@ import characters.Characters;
 
 public abstract class SelfBuffs extends Skill {
 
-	protected int _remainingCharges;
-
 	public SelfBuffs(String name, Characters caster, int charges) {
-		super(name, caster);
-		_remainingCharges = charges;
+		super(name, charges, caster);
 	}
 
-	abstract boolean use();
+	public abstract boolean use();
+	
+	public abstract int getEffect();
 }

@@ -4,12 +4,11 @@ import characters.*;
 
 public abstract class OffensiveSkills extends Skill {
 
-	protected int _remainingCharges;
-
 	public OffensiveSkills(String name, Characters caster, int charges) {
-		super(name, caster);
-		_remainingCharges = charges;
+		super(name, charges, caster);
 	}
 
-	abstract boolean use(Characters target);
+	public abstract boolean use(Characters target);
+	
+	public abstract int getDamage();
 }

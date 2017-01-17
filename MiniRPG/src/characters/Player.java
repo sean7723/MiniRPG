@@ -2,16 +2,14 @@ package characters;
 
 import java.util.ArrayList;
 
-import item.Chestplate;
-import item.Consumable;
-import item.Equipable;
-import item.Item;
-import item.Sword;
+import item.*;
+import skill.*;
 
 public class Player extends Characters {
 
 	private ArrayList<Consumable> _inventory;
 	private ArrayList<Equipable> _equippedItems;
+	private ArrayList<Skill> _skillsList;
 
 	public Player(String name) {
 		super(0, 0, 0, name);
@@ -19,6 +17,9 @@ public class Player extends Characters {
 		_equippedItems = new ArrayList<Equipable>();
 		equipItem(new Sword("Basic Sword", 10000, 0));
 		equipItem(new Chestplate("Basic Chestplate", 10000, 10000, 0));
+		_skillsList = new ArrayList<Skill>();
+		_skillsList.add(new Healing(this));
+		_skillsList.add(new Fireball(this));
 	}
 
 	public void equipItem(Equipable e) {
@@ -44,5 +45,9 @@ public class Player extends Characters {
 
 	public ArrayList<Consumable> getInventory() {
 		return _inventory;
+	}
+	
+	public ArrayList<Skill> getSkills() {
+		return _skillsList;
 	}
 }

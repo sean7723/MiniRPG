@@ -181,6 +181,9 @@ public class BackEnd {
 		case 2:
 			_inter.toggleInventory();
 			break;
+		case 3:
+			_inter.toggleSkill();
+			break;
 		default:
 			break;
 		}

@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import skill.*;
 
 public class PlayerInterface implements Runnable {
 
@@ -15,6 +16,7 @@ public class PlayerInterface implements Runnable {
 	private JFrame _frame;
 	private JFrame _storeFrame;
 	private JFrame _inventoryFrame;
+	private JFrame _skillFrame;
 	private JLabel _enemy1;
 	private JLabel _enemy2;
 	private JLabel _enemy3;
@@ -29,9 +31,15 @@ public class PlayerInterface implements Runnable {
 	private JLabel _storeBalance;
 	private JLabel _inventoryBalance;
 	private JLabel _consumableInformation1;
-	private JButton _hitButton;
+	private JLabel _skillInformation1;
+	private JLabel _skillInformation2;
 	private JButton _skillButton;
+	private JButton _skillCloseButton;
+	private JButton _useSkill1;
+	private JButton _useSkill2;
 	private JButton _inventoryButton;
+	private JButton _inventoryCloseButton;
+	private JButton _inventoryUse1;
 	private JButton _storeButton;
 	private JButton _storeCloseButton;
 	private JButton _storePurchase1;
@@ -43,8 +51,6 @@ public class PlayerInterface implements Runnable {
 	private JButton _storePurchase7;
 	private JButton _storePurchase8;
 	private JButton _storePurchase9;
-	private JButton _inventoryCloseButton;
-	private JButton _inventoryUse1;
 	private JButton _target1;
 	private JButton _target2;
 	private JButton _target3;
@@ -69,20 +75,20 @@ public class PlayerInterface implements Runnable {
 		_enemy4 = new JLabel("Hello");
 		_enemy5 = new JLabel("Hello");
 		// Main window second row
-		_target1 = new JButton("Target");
-		_target2 = new JButton("Target");
-		_target3 = new JButton("Target");
-		_target4 = new JButton("Target");
-		_target5 = new JButton("Target");
+		_target1 = new JButton("Hit");
+		_target2 = new JButton("Hit");
+		_target3 = new JButton("Hit");
+		_target4 = new JButton("Hit");
+		_target5 = new JButton("Hit");
 		// Main window third Row
 		_gameName = new JLabel("- Fun Adventures -", SwingConstants.CENTER);
 		// Main window fourth row
 		_playerInt1 = new JLabel("temp");
 		_playerInt2 = new JLabel("temp");
-		_hitButton = new JButton("Hit");
-		_skillButton = new JButton("Skill");
+		_skillButton = new JButton("Skills");
 		_inventoryButton = new JButton("Open Inventory");
 		_storeButton = new JButton("Open Store");
+		
 		// Store Window
 		_storeFrame = new JFrame("Fun Adventures Store");
 		_storeCloseButton = new JButton("Close Store");
@@ -96,6 +102,14 @@ public class PlayerInterface implements Runnable {
 		_storePurchase8 = new JButton("Purchase Gold Chestplate");
 		_storePurchase9 = new JButton("Purchase Diamond Chestplate");
 		_storeBalance = new JLabel("");
+		
+		// Skill Window
+		_skillFrame = new JFrame("Skills");
+		_skillCloseButton = new JButton("Close Skill");
+		_skillInformation1 = new JLabel("");
+		_skillInformation2 = new JLabel("");
+		_useSkill1 = new JButton("Use Healing");
+		_useSkill2 = new JButton("Use Fireball");
 
 		// Inventory Window
 		_inventoryFrame = new JFrame("Inventory");
@@ -164,6 +178,9 @@ public class PlayerInterface implements Runnable {
 		_storePurchase7.addActionListener(new EventHandlerMakePurchase(_model, 7));
 		_storePurchase8.addActionListener(new EventHandlerMakePurchase(_model, 8));
 		_storePurchase9.addActionListener(new EventHandlerMakePurchase(_model, 9));
+		
+		_skillButton.addActionListener(new EventHandlerChangeWindows(_model, 3));
+		_skillCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 3));
 
 		_inventoryButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
 		_inventoryCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
@@ -213,6 +230,15 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.add(_storePurchase7);
 		_storeFrame.add(_storePurchase8);
 		_storeFrame.add(_storePurchase9);
+		
+		// Skill Window
+		_skillFrame.getContentPane().setLayout(new GridLayout(2, 3));
+		_skillFrame.add(new JLabel("Temp"));
+		_skillFrame.add(_skillInformation1);
+		_skillFrame.add(_skillInformation2);
+		_skillFrame.add(_skillCloseButton);
+		_skillFrame.add(_useSkill1);
+		_skillFrame.add(_useSkill2);
 
 		// Inventory Window
 		_inventoryFrame.getContentPane().setLayout(new GridLayout(2, 2));
@@ -222,11 +248,14 @@ public class PlayerInterface implements Runnable {
 		_inventoryFrame.add(_inventoryCloseButton);
 		_inventoryFrame.add(_inventoryUse1);
 
-		_inventoryFrame.pack();
-		_inventoryFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
 		_storeFrame.pack();
 		_storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		_skillFrame.pack();
+		_skillFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		_inventoryFrame.pack();
+		_inventoryFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		_frame.pack();
 		_frame.setVisible(true);
@@ -259,6 +288,8 @@ public class PlayerInterface implements Runnable {
 		_consumableInformation1.setText("<html>" + _model.getStoreConsumable(0).getName() + "<br /> Healing: "
 				+ _model.getStoreConsumable(0).getHealth() + "<br /> Amount: "
 				+ _model.getAmountOfItemInInventory(_model.getStoreConsumable(0).getName()) + "</html>");
+		_skillInformation1.setText("<html> Name: " + _model.getPlayer().getSkills().get(0).getName() + "<br /> Healing: " + ((SelfBuffs)_model.getPlayer().getSkills().get(0)).getEffect() + "<br /> Charges Left: " + _model.getPlayer().getSkills().get(0).getRemainingCharges() + "</html>");
+		_skillInformation2.setText("<html> Name: " + _model.getPlayer().getSkills().get(1).getName() + "<br /> Damage: " + ((OffensiveSkills)_model.getPlayer().getSkills().get(1)).getDamage() + "<br /> Charges Left: " + _model.getPlayer().getSkills().get(1).getRemainingCharges() + "</html>");
 	}
 
 	public void toggleStore() {
@@ -278,6 +309,14 @@ public class PlayerInterface implements Runnable {
 		} else {
 			_inventoryButton.setText("Close Inventory");
 			_inventoryFrame.setVisible(true);
+		}
+	}
+	
+	public void toggleSkill() {
+		if (_skillFrame.isVisible()) {
+			_skillFrame.setVisible(false);
+		} else {
+			_skillFrame.setVisible(true);
 		}
 	}
 }
