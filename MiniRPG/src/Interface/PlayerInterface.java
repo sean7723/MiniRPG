@@ -96,8 +96,8 @@ public class PlayerInterface implements Runnable {
 		_storePurchase8 = new JButton("Purchase Gold Chestplate");
 		_storePurchase9 = new JButton("Purchase Diamond Chestplate");
 		_storeBalance = new JLabel("");
-		
-		//Inventory Window
+
+		// Inventory Window
 		_inventoryFrame = new JFrame("Inventory");
 		_inventoryCloseButton = new JButton("Close Inventory");
 		_inventoryUse1 = new JButton("Use Health Potion");
@@ -144,8 +144,8 @@ public class PlayerInterface implements Runnable {
 		_panel4.add(_storeButton);
 		_panel4.add(_skillButton);
 		_panel4.add(_inventoryButton);
-		
-		//Buttons
+
+		// Buttons
 		_target1.addActionListener(new EventHandlerAttack(_model, 0));
 		_target2.addActionListener(new EventHandlerAttack(_model, 1));
 		_target3.addActionListener(new EventHandlerAttack(_model, 2));
@@ -164,7 +164,7 @@ public class PlayerInterface implements Runnable {
 		_storePurchase7.addActionListener(new EventHandlerMakePurchase(_model, 7));
 		_storePurchase8.addActionListener(new EventHandlerMakePurchase(_model, 8));
 		_storePurchase9.addActionListener(new EventHandlerMakePurchase(_model, 9));
-		
+
 		_inventoryButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
 		_inventoryCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
 		_inventoryUse1.addActionListener(new EventHandlerUseConsumable(_model, "Health Potion"));
@@ -213,15 +213,15 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.add(_storePurchase7);
 		_storeFrame.add(_storePurchase8);
 		_storeFrame.add(_storePurchase9);
-		
+
 		// Inventory Window
 		_inventoryFrame.getContentPane().setLayout(new GridLayout(2, 2));
-		//Inventory First Row
+		// Inventory First Row
 		_inventoryFrame.add(_inventoryBalance);
 		_inventoryFrame.add(_consumableInformation1);
 		_inventoryFrame.add(_inventoryCloseButton);
 		_inventoryFrame.add(_inventoryUse1);
-		
+
 		_inventoryFrame.pack();
 		_inventoryFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -256,7 +256,9 @@ public class PlayerInterface implements Runnable {
 				+ "<br />Armor: " + _model.getPlayer().getArmor() + "</html>");
 		_storeBalance.setText("Balance: " + _model.getMoney());
 		_inventoryBalance.setText("Balance: " + _model.getMoney());
-		_consumableInformation1.setText("<html>" + _model.getStoreConsumable(0).getName() + "<br /> Healing: " + _model.getStoreConsumable(0).getHealth() + "<br /> Amount: " + _model.getAmountOfItemInInventory(_model.getStoreConsumable(0).getName()) + "</html>");
+		_consumableInformation1.setText("<html>" + _model.getStoreConsumable(0).getName() + "<br /> Healing: "
+				+ _model.getStoreConsumable(0).getHealth() + "<br /> Amount: "
+				+ _model.getAmountOfItemInInventory(_model.getStoreConsumable(0).getName()) + "</html>");
 	}
 
 	public void toggleStore() {
@@ -268,7 +270,7 @@ public class PlayerInterface implements Runnable {
 			_storeFrame.setVisible(true);
 		}
 	}
-	
+
 	public void toggleInventory() {
 		if (_inventoryFrame.isVisible()) {
 			_inventoryButton.setText("Open Iventory");

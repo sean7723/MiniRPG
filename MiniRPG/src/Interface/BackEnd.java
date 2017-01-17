@@ -43,8 +43,8 @@ public class BackEnd {
 	public void createEnemies() {
 		for (int i = 0; i < 5; i++) {
 			_enemies.add(new Enemies((int) (Math.random() * 800 + (200 * (_round / 5))),
-					(int) (Math.random() * 60 + (10 * (_round / 5))),
-					(int) (Math.random() * 12 + (10 * (_round / 5))), _names[(int) (Math.random() * 6 + 1)]));
+					(int) (Math.random() * 60 + (10 * (_round / 5))), (int) (Math.random() * 12 + (10 * (_round / 5))),
+					_names[(int) (Math.random() * 6 + 1)]));
 		}
 	}
 
@@ -159,16 +159,16 @@ public class BackEnd {
 			break;
 		}
 	}
-	
+
 	public void useConsumable(String name) {
-		for(int i = 0; i < _player.getInventory().size(); i++) {
-			if(_player.getInventory().get(i).getName().equals(name)) {
-				if(_player.getInventory().get(i).use()) {
+		for (int i = 0; i < _player.getInventory().size(); i++) {
+			if (_player.getInventory().get(i).getName().equals(name)) {
+				if (_player.getInventory().get(i).use()) {
 					_player.getInventory().remove(i);
 					_inter.update();
 					return;
 				}
-					
+
 			}
 		}
 	}
@@ -185,12 +185,12 @@ public class BackEnd {
 			break;
 		}
 	}
-	
+
 	public int getAmountOfItemInInventory(String name) {
 		ArrayList<Consumable> inventory = _player.getInventory();
 		int amount = 0;
-		for(Consumable item : inventory)
-			if(item.getName().equals(name))
+		for (Consumable item : inventory)
+			if (item.getName().equals(name))
 				amount++;
 		return amount;
 	}

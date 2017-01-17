@@ -6,5 +6,5 @@ public class Enemies extends Characters {
 		super(health, attack, armor, name);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }

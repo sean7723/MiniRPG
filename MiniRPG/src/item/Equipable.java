@@ -1,11 +1,11 @@
 package item;
 
 public abstract class Equipable extends Item {
-	
+
 	private int _health;
 	private int _armor;
 	private int _attack;
-	
+
 	public Equipable(String name, int price) {
 		super(name, price);
 	}
@@ -32,6 +32,6 @@ public abstract class Equipable extends Item {
 
 	public void setAttack(int _attack) {
 		this._attack = _attack;
-	}	
+	}
 
 }

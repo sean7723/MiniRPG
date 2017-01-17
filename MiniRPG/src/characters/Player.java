@@ -41,7 +41,7 @@ public class Player extends Characters {
 		setAttack(attack);
 		setArmor(armor);
 	}
-	
+
 	public ArrayList<Consumable> getInventory() {
 		return _inventory;
 	}
