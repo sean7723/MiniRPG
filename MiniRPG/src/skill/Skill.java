@@ -3,7 +3,7 @@ package skill;
 import characters.Characters;
 
 public abstract class Skill {
-	
+
 	private boolean _isUnlocked;
 	protected String _name;
 	protected Characters _caster;
@@ -23,15 +23,15 @@ public abstract class Skill {
 	public String getCasterName() {
 		return _caster.getName();
 	}
-	
+
 	public boolean isUnlocked() {
 		return _isUnlocked;
 	}
-	
+
 	public void unlock() {
 		_isUnlocked = true;
 	}
-	
+
 	public int getRemainingCharges() {
 		return _remainingCharges;
 	}

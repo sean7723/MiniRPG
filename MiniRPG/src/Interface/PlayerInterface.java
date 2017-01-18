@@ -121,7 +121,7 @@ public class PlayerInterface implements Runnable {
 		_skillInformation2 = new JLabel("");
 		_useSkill1 = new JButton("Use Healing");
 		_useSkill2 = new JButton("Use Fireball");
-		
+
 		// Skill Target Window
 		_skillTargetFrame = new JFrame("Target Skill");
 		_skillTarget1 = new JButton("Target");
@@ -270,7 +270,7 @@ public class PlayerInterface implements Runnable {
 		_skillFrame.add(_skillCloseButton);
 		_skillFrame.add(_useSkill1);
 		_skillFrame.add(_useSkill2);
-		
+
 		// Skill Target Window
 		_skillTargetFrame.getContentPane().setLayout(new GridLayout(2, 5));
 		_skillTargetFrame.add(_enemyTargetInfo1);
@@ -297,7 +297,7 @@ public class PlayerInterface implements Runnable {
 
 		_skillFrame.pack();
 		_skillFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
+
 		_skillTargetFrame.pack();
 		_skillTargetFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -385,7 +385,7 @@ public class PlayerInterface implements Runnable {
 			_skillFrame.setVisible(true);
 		}
 	}
-	
+
 	public void toggleSkillTarget() {
 		if (_skillTargetFrame.isVisible()) {
 			_skillTargetFrame.setVisible(false);

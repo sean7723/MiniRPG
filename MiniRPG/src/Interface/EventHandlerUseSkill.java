@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EventHandlerUseSkill implements ActionListener {
-	
+
 	private BackEnd _model;
 	private int _skillNum;
 

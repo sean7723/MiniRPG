@@ -19,7 +19,7 @@ public class BackEnd {
 
 	public BackEnd(String name, PlayerInterface inter) {
 		_enemies = new ArrayList<Enemies>();
-		if(name != null)
+		if (name != null)
 			_player = new Player(name);
 		else
 			_player = new Player("Noob");
@@ -163,20 +163,19 @@ public class BackEnd {
 			break;
 		}
 	}
-	
+
 	public void useSkill(int skillNum) {
-		if(_player.getSkills().get(skillNum) instanceof OffensiveSkills) {
-			_lastOffensiveSkill = (OffensiveSkills)_player.getSkills().get(skillNum);
+		if (_player.getSkills().get(skillNum) instanceof OffensiveSkills) {
+			_lastOffensiveSkill = (OffensiveSkills) _player.getSkills().get(skillNum);
 			_inter.toggleSkillTarget();
-		}
-		else {
-			((SelfBuffs)_player.getSkills().get(skillNum)).use();
+		} else {
+			((SelfBuffs) _player.getSkills().get(skillNum)).use();
 		}
 		_inter.update();
 	}
-	
+
 	public void useOffensiveSkill(Characters target) {
-		if(target.getHealth() > 0 && _lastOffensiveSkill != null) {
+		if (target.getHealth() > 0 && _lastOffensiveSkill != null) {
 			_lastOffensiveSkill.use(target);
 			_inter.toggleSkillTarget();
 			enemyHits();

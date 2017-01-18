@@ -9,6 +9,6 @@ public abstract class OffensiveSkills extends Skill {
 	}
 
 	public abstract boolean use(Characters target);
-	
+
 	public abstract int getDamage();
 }

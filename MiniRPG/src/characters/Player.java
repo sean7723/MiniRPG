@@ -46,7 +46,7 @@ public class Player extends Characters {
 	public ArrayList<Consumable> getInventory() {
 		return _inventory;
 	}
-	
+
 	public ArrayList<Skill> getSkills() {
 		return _skillsList;
 	}

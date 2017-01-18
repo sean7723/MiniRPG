@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import characters.Characters;
 
 public class EventHandlerTargetOffensive implements ActionListener {
-	
+
 	private BackEnd _model;
 	private Characters _target;
 

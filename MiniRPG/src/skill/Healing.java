@@ -17,7 +17,7 @@ public class Healing extends SelfBuffs {
 		}
 		return false;
 	}
-	
+
 	public int getEffect() {
 		return 200;
 	}

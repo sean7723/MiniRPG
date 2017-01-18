@@ -17,7 +17,7 @@ public class Fireball extends OffensiveSkills {
 		}
 		return false;
 	}
-	
+
 	public int getDamage() {
 		return 500;
 	}
