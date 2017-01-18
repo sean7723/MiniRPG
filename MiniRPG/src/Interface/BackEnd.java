@@ -25,7 +25,7 @@ public class BackEnd {
 			_player = new Player("Noob");
 		_player.addHealth(_player.getMaxHealth());
 		_inter = inter;
-		_money = 10000000;
+		_money = 500;
 		_round = 1;
 		createStore();
 		createEnemies();

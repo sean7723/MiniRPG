@@ -2,12 +2,14 @@ package Interface;
 
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.ImageIcon;
 import skill.*;
 
 public class PlayerInterface implements Runnable {
@@ -71,6 +73,7 @@ public class PlayerInterface implements Runnable {
 	private JPanel _panel2;
 	private JPanel _panel3;
 	private JPanel _panel4;
+	private JPanel _panel5;
 
 	public PlayerInterface() {
 		// Main window
@@ -79,6 +82,7 @@ public class PlayerInterface implements Runnable {
 		_panel2 = new JPanel();
 		_panel3 = new JPanel();
 		_panel4 = new JPanel();
+		_panel5 = new JPanel();
 		// Main window first row
 		_enemy1 = new JLabel("Hello");
 		_enemy2 = new JLabel("Hello");
@@ -153,30 +157,38 @@ public class PlayerInterface implements Runnable {
 	@Override
 	public void run() {
 		// Main game Window
-		_frame.getContentPane().setLayout(new GridLayout(4, 1));
+		_frame.getContentPane().setLayout(new GridLayout(5, 1));
 		_panel1.setLayout(new GridLayout(1, 5));
 		_panel2.setLayout(new GridLayout(1, 5));
 		_panel3.setLayout(new GridLayout(1, 1));
 		_panel4.setLayout(new GridLayout(1, 5));
+		_panel5.setLayout(new GridLayout(1, 5));
+		_frame.add(_panel5);
 		_frame.add(_panel1);
 		_frame.add(_panel2);
 		_frame.add(_panel3);
 		_frame.add(_panel4);
 		// Main game first row
+		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
+		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
+		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
+		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
+		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
+		// Main game second row
 		_panel1.add(_enemy1);
 		_panel1.add(_enemy2);
 		_panel1.add(_enemy3);
 		_panel1.add(_enemy4);
 		_panel1.add(_enemy5);
-		// Main game second row
+		// Main game third row
 		_panel2.add(_target1);
 		_panel2.add(_target2);
 		_panel2.add(_target3);
 		_panel2.add(_target4);
 		_panel2.add(_target5);
-		// Main game third row
-		_panel3.add(_gameName);
 		// Main game fourth row
+		_panel3.add(_gameName);
+		// Main game fifth row
 		_panel4.add(_playerInt1);
 		_panel4.add(_playerInt2);
 		_panel4.add(_storeButton);
