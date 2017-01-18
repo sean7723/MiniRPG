@@ -15,10 +15,14 @@ public class BackEnd {
 	private Player _player;
 	private int _money;
 	private int _round;
+	private OffensiveSkills _lastOffensiveSkill;
 
 	public BackEnd(String name, PlayerInterface inter) {
 		_enemies = new ArrayList<Enemies>();
-		_player = new Player(name);
+		if(name != null)
+			_player = new Player(name);
+		else
+			_player = new Player("Noob");
 		_player.addHealth(_player.getMaxHealth());
 		_inter = inter;
 		_money = 10000000;
@@ -157,6 +161,27 @@ public class BackEnd {
 				_inter.update();
 			}
 			break;
+		}
+	}
+	
+	public void useSkill(int skillNum) {
+		if(_player.getSkills().get(skillNum) instanceof OffensiveSkills) {
+			_lastOffensiveSkill = (OffensiveSkills)_player.getSkills().get(skillNum);
+			_inter.toggleSkillTarget();
+		}
+		else {
+			((SelfBuffs)_player.getSkills().get(skillNum)).use();
+		}
+		_inter.update();
+	}
+	
+	public void useOffensiveSkill(Characters target) {
+		if(target.getHealth() > 0 && _lastOffensiveSkill != null) {
+			_lastOffensiveSkill.use(target);
+			_inter.toggleSkillTarget();
+			enemyHits();
+			_lastOffensiveSkill = null;
+			_inter.update();
 		}
 	}
 

@@ -17,11 +17,17 @@ public class PlayerInterface implements Runnable {
 	private JFrame _storeFrame;
 	private JFrame _inventoryFrame;
 	private JFrame _skillFrame;
+	private JFrame _skillTargetFrame;
 	private JLabel _enemy1;
 	private JLabel _enemy2;
 	private JLabel _enemy3;
 	private JLabel _enemy4;
 	private JLabel _enemy5;
+	private JLabel _enemyTargetInfo1;
+	private JLabel _enemyTargetInfo2;
+	private JLabel _enemyTargetInfo3;
+	private JLabel _enemyTargetInfo4;
+	private JLabel _enemyTargetInfo5;
 	private JLabel _playerInt1;
 	private JLabel _playerInt2;
 	private JLabel _playerInt3;
@@ -56,6 +62,11 @@ public class PlayerInterface implements Runnable {
 	private JButton _target3;
 	private JButton _target4;
 	private JButton _target5;
+	private JButton _skillTarget1;
+	private JButton _skillTarget2;
+	private JButton _skillTarget3;
+	private JButton _skillTarget4;
+	private JButton _skillTarget5;
 	private JPanel _panel1;
 	private JPanel _panel2;
 	private JPanel _panel3;
@@ -88,7 +99,7 @@ public class PlayerInterface implements Runnable {
 		_skillButton = new JButton("Skills");
 		_inventoryButton = new JButton("Open Inventory");
 		_storeButton = new JButton("Open Store");
-		
+
 		// Store Window
 		_storeFrame = new JFrame("Fun Adventures Store");
 		_storeCloseButton = new JButton("Close Store");
@@ -102,7 +113,7 @@ public class PlayerInterface implements Runnable {
 		_storePurchase8 = new JButton("Purchase Gold Chestplate");
 		_storePurchase9 = new JButton("Purchase Diamond Chestplate");
 		_storeBalance = new JLabel("");
-		
+
 		// Skill Window
 		_skillFrame = new JFrame("Skills");
 		_skillCloseButton = new JButton("Close Skill");
@@ -110,6 +121,19 @@ public class PlayerInterface implements Runnable {
 		_skillInformation2 = new JLabel("");
 		_useSkill1 = new JButton("Use Healing");
 		_useSkill2 = new JButton("Use Fireball");
+		
+		// Skill Target Window
+		_skillTargetFrame = new JFrame("Target Skill");
+		_skillTarget1 = new JButton("Target");
+		_skillTarget2 = new JButton("Target");
+		_skillTarget3 = new JButton("Target");
+		_skillTarget4 = new JButton("Target");
+		_skillTarget5 = new JButton("Target");
+		_enemyTargetInfo1 = new JLabel("Hello");
+		_enemyTargetInfo2 = new JLabel("Hello");
+		_enemyTargetInfo3 = new JLabel("Hello");
+		_enemyTargetInfo4 = new JLabel("Hello");
+		_enemyTargetInfo5 = new JLabel("Hello");
 
 		// Inventory Window
 		_inventoryFrame = new JFrame("Inventory");
@@ -178,9 +202,16 @@ public class PlayerInterface implements Runnable {
 		_storePurchase7.addActionListener(new EventHandlerMakePurchase(_model, 7));
 		_storePurchase8.addActionListener(new EventHandlerMakePurchase(_model, 8));
 		_storePurchase9.addActionListener(new EventHandlerMakePurchase(_model, 9));
-		
+
 		_skillButton.addActionListener(new EventHandlerChangeWindows(_model, 3));
 		_skillCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 3));
+		_useSkill1.addActionListener(new EventHandlerUseSkill(_model, 0));
+		_useSkill2.addActionListener(new EventHandlerUseSkill(_model, 1));
+		_skillTarget1.addActionListener(new EventHandlerTargetOffensive(_model, _model.getEnemy1()));
+		_skillTarget2.addActionListener(new EventHandlerTargetOffensive(_model, _model.getEnemy2()));
+		_skillTarget3.addActionListener(new EventHandlerTargetOffensive(_model, _model.getEnemy3()));
+		_skillTarget4.addActionListener(new EventHandlerTargetOffensive(_model, _model.getEnemy4()));
+		_skillTarget5.addActionListener(new EventHandlerTargetOffensive(_model, _model.getEnemy5()));
 
 		_inventoryButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
 		_inventoryCloseButton.addActionListener(new EventHandlerChangeWindows(_model, 2));
@@ -230,7 +261,7 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.add(_storePurchase7);
 		_storeFrame.add(_storePurchase8);
 		_storeFrame.add(_storePurchase9);
-		
+
 		// Skill Window
 		_skillFrame.getContentPane().setLayout(new GridLayout(2, 3));
 		_skillFrame.add(new JLabel("Temp"));
@@ -239,6 +270,19 @@ public class PlayerInterface implements Runnable {
 		_skillFrame.add(_skillCloseButton);
 		_skillFrame.add(_useSkill1);
 		_skillFrame.add(_useSkill2);
+		
+		// Skill Target Window
+		_skillTargetFrame.getContentPane().setLayout(new GridLayout(2, 5));
+		_skillTargetFrame.add(_enemyTargetInfo1);
+		_skillTargetFrame.add(_enemyTargetInfo2);
+		_skillTargetFrame.add(_enemyTargetInfo3);
+		_skillTargetFrame.add(_enemyTargetInfo4);
+		_skillTargetFrame.add(_enemyTargetInfo5);
+		_skillTargetFrame.add(_skillTarget1);
+		_skillTargetFrame.add(_skillTarget2);
+		_skillTargetFrame.add(_skillTarget3);
+		_skillTargetFrame.add(_skillTarget4);
+		_skillTargetFrame.add(_skillTarget5);
 
 		// Inventory Window
 		_inventoryFrame.getContentPane().setLayout(new GridLayout(2, 2));
@@ -250,10 +294,13 @@ public class PlayerInterface implements Runnable {
 
 		_storeFrame.pack();
 		_storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
+
 		_skillFrame.pack();
 		_skillFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
+		_skillTargetFrame.pack();
+		_skillTargetFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
 		_inventoryFrame.pack();
 		_inventoryFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -278,6 +325,21 @@ public class PlayerInterface implements Runnable {
 		_enemy5.setText("<html> Name: " + _model.getEnemy5().getName() + "<br />Health: "
 				+ _model.getEnemy5().getHealth() + " / " + _model.getEnemy5().getMaxHealth() + "<br />Attack: "
 				+ _model.getEnemy5().getAttack() + "<br />Armor: " + _model.getEnemy5().getArmor() + "</html>");
+		_enemyTargetInfo1.setText("<html> Name: " + _model.getEnemy1().getName() + "<br />Health: "
+				+ _model.getEnemy1().getHealth() + " / " + _model.getEnemy1().getMaxHealth() + "<br />Attack: "
+				+ _model.getEnemy1().getAttack() + "<br />Armor: " + _model.getEnemy1().getArmor() + "</html>");
+		_enemyTargetInfo2.setText("<html> Name: " + _model.getEnemy2().getName() + "<br />Health: "
+				+ _model.getEnemy2().getHealth() + " / " + _model.getEnemy2().getMaxHealth() + "<br />Attack: "
+				+ _model.getEnemy2().getAttack() + "<br />Armor: " + _model.getEnemy2().getArmor() + "</html>");
+		_enemyTargetInfo3.setText("<html> Name: " + _model.getEnemy3().getName() + "<br />Health: "
+				+ _model.getEnemy3().getHealth() + " / " + _model.getEnemy3().getMaxHealth() + "<br />Attack: "
+				+ _model.getEnemy3().getAttack() + "<br />Armor: " + _model.getEnemy3().getArmor() + "</html>");
+		_enemyTargetInfo4.setText("<html> Name: " + _model.getEnemy4().getName() + "<br />Health: "
+				+ _model.getEnemy4().getHealth() + " / " + _model.getEnemy4().getMaxHealth() + "<br />Attack: "
+				+ _model.getEnemy4().getAttack() + "<br />Armor: " + _model.getEnemy4().getArmor() + "</html>");
+		_enemyTargetInfo5.setText("<html> Name: " + _model.getEnemy5().getName() + "<br />Health: "
+				+ _model.getEnemy5().getHealth() + " / " + _model.getEnemy5().getMaxHealth() + "<br />Attack: "
+				+ _model.getEnemy5().getAttack() + "<br />Armor: " + _model.getEnemy5().getArmor() + "</html>");
 		_playerInt1.setText("<html>" + _model.getPlayer().getName() + "<br /> Balance: " + _model.getMoney()
 				+ "<br /> Round: " + _model.getRound() + "</html>");
 		_playerInt2.setText("<html>Health: " + _model.getPlayer().getHealth() + " / "
@@ -288,8 +350,12 @@ public class PlayerInterface implements Runnable {
 		_consumableInformation1.setText("<html>" + _model.getStoreConsumable(0).getName() + "<br /> Healing: "
 				+ _model.getStoreConsumable(0).getHealth() + "<br /> Amount: "
 				+ _model.getAmountOfItemInInventory(_model.getStoreConsumable(0).getName()) + "</html>");
-		_skillInformation1.setText("<html> Name: " + _model.getPlayer().getSkills().get(0).getName() + "<br /> Healing: " + ((SelfBuffs)_model.getPlayer().getSkills().get(0)).getEffect() + "<br /> Charges Left: " + _model.getPlayer().getSkills().get(0).getRemainingCharges() + "</html>");
-		_skillInformation2.setText("<html> Name: " + _model.getPlayer().getSkills().get(1).getName() + "<br /> Damage: " + ((OffensiveSkills)_model.getPlayer().getSkills().get(1)).getDamage() + "<br /> Charges Left: " + _model.getPlayer().getSkills().get(1).getRemainingCharges() + "</html>");
+		_skillInformation1.setText("<html> Name: " + _model.getPlayer().getSkills().get(0).getName()
+				+ "<br /> Healing: " + ((SelfBuffs) _model.getPlayer().getSkills().get(0)).getEffect()
+				+ "<br /> Charges Left: " + _model.getPlayer().getSkills().get(0).getRemainingCharges() + "</html>");
+		_skillInformation2.setText("<html> Name: " + _model.getPlayer().getSkills().get(1).getName() + "<br /> Damage: "
+				+ ((OffensiveSkills) _model.getPlayer().getSkills().get(1)).getDamage() + "<br /> Charges Left: "
+				+ _model.getPlayer().getSkills().get(1).getRemainingCharges() + "</html>");
 	}
 
 	public void toggleStore() {
@@ -311,12 +377,20 @@ public class PlayerInterface implements Runnable {
 			_inventoryFrame.setVisible(true);
 		}
 	}
-	
+
 	public void toggleSkill() {
 		if (_skillFrame.isVisible()) {
 			_skillFrame.setVisible(false);
 		} else {
 			_skillFrame.setVisible(true);
+		}
+	}
+	
+	public void toggleSkillTarget() {
+		if (_skillTargetFrame.isVisible()) {
+			_skillTargetFrame.setVisible(false);
+		} else {
+			_skillTargetFrame.setVisible(true);
 		}
 	}
 }
