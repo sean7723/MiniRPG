@@ -1,7 +1,7 @@
 package Interface;
 
 import java.util.ArrayList;
-
+import javax.swing.ImageIcon;
 import characters.*;
 import item.*;
 import skill.*;
@@ -227,7 +227,7 @@ public class BackEnd {
 	}
 
 	public Equipable getStoreEquip(int itemNum) {
-		return (Equipable) (_store.get(itemNum));
+		return (Equipable) _store.get(itemNum);
 	}
 
 	public Enemies getEnemy(int position) {
@@ -264,5 +264,13 @@ public class BackEnd {
 
 	public int getRound() {
 		return _round;
+	}
+	
+	public ImageIcon getEnemyImage(Characters enemy) {
+		if(enemy.getHealth() > 0) {
+			return new ImageIcon("images/enemies.jpg");
+		}
+		else 
+			return new ImageIcon("images/enemiesDead.jpg");
 	}
 }

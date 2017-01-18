@@ -41,6 +41,16 @@ public class PlayerInterface implements Runnable {
 	private JLabel _consumableInformation1;
 	private JLabel _skillInformation1;
 	private JLabel _skillInformation2;
+	private JLabel _enemyImage1;
+	private JLabel _enemyImage2;
+	private JLabel _enemyImage3;
+	private JLabel _enemyImage4;
+	private JLabel _enemyImage5;
+	private JLabel _enemyInfoImage1;
+	private JLabel _enemyInfoImage2;
+	private JLabel _enemyInfoImage3;
+	private JLabel _enemyInfoImage4;
+	private JLabel _enemyInfoImage5;
 	private JButton _skillButton;
 	private JButton _skillCloseButton;
 	private JButton _useSkill1;
@@ -89,6 +99,11 @@ public class PlayerInterface implements Runnable {
 		_enemy3 = new JLabel("Hello");
 		_enemy4 = new JLabel("Hello");
 		_enemy5 = new JLabel("Hello");
+		_enemyImage1 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyImage2 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyImage3 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyImage4 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyImage5 = new JLabel(new ImageIcon("images/enemies.jpg"));
 		// Main window second row
 		_target1 = new JButton("Hit");
 		_target2 = new JButton("Hit");
@@ -114,7 +129,7 @@ public class PlayerInterface implements Runnable {
 		_storePurchase5 = new JButton("Purchase Diamond Sword");
 		_storePurchase6 = new JButton("Purchase Stone Chestplate");
 		_storePurchase7 = new JButton("Purchase Iron Chestplate");
-		_storePurchase8 = new JButton("Purchase Gold Chestplate");
+		_storePurchase8 = new JButton("Purchase Chainmail Chestplate");
 		_storePurchase9 = new JButton("Purchase Diamond Chestplate");
 		_storeBalance = new JLabel("");
 
@@ -138,6 +153,11 @@ public class PlayerInterface implements Runnable {
 		_enemyTargetInfo3 = new JLabel("Hello");
 		_enemyTargetInfo4 = new JLabel("Hello");
 		_enemyTargetInfo5 = new JLabel("Hello");
+		_enemyInfoImage1 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyInfoImage2 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyInfoImage3 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyInfoImage4 = new JLabel(new ImageIcon("images/enemies.jpg"));
+		_enemyInfoImage5 = new JLabel(new ImageIcon("images/enemies.jpg"));
 
 		// Inventory Window
 		_inventoryFrame = new JFrame("Inventory");
@@ -169,11 +189,11 @@ public class PlayerInterface implements Runnable {
 		_frame.add(_panel3);
 		_frame.add(_panel4);
 		// Main game first row
-		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
-		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
-		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
-		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
-		_panel5.add(new JLabel(new ImageIcon("images/enemies.jpg")));
+		_panel5.add(_enemyImage1);
+		_panel5.add(_enemyImage2);
+		_panel5.add(_enemyImage3);
+		_panel5.add(_enemyImage4);
+		_panel5.add(_enemyImage5);
 		// Main game second row
 		_panel1.add(_enemy1);
 		_panel1.add(_enemy2);
@@ -230,7 +250,12 @@ public class PlayerInterface implements Runnable {
 		_inventoryUse1.addActionListener(new EventHandlerUseConsumable(_model, "Health Potion"));
 
 		// Store window
-		_storeFrame.getContentPane().setLayout(new GridLayout(4, 5));
+		_storeFrame.getContentPane().setLayout(new GridLayout(6, 5));
+		_storeFrame.add(new JLabel(new ImageIcon("images/healthPotion.jpg")));
+		_storeFrame.add(new JLabel(new ImageIcon("images/stoneSword.jpg")));
+		_storeFrame.add(new JLabel(new ImageIcon("images/ironSword.jpg")));
+		_storeFrame.add(new JLabel(new ImageIcon("images/goldSword.jpg")));
+		_storeFrame.add(new JLabel(new ImageIcon("images/diamondSword.jpg")));
 		// Store first Row
 		_storeFrame.add(new JLabel("<html> Name: Health Potion " + "					<br /> Health: "
 				+ _model.getStoreConsumable(0).getHealth() + "<br/> Price: "
@@ -253,6 +278,13 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.add(_storePurchase3);
 		_storeFrame.add(_storePurchase4);
 		_storeFrame.add(_storePurchase5);
+		
+		_storeFrame.add(new JLabel(""));
+		_storeFrame.add(new JLabel(new ImageIcon("images/stoneChestplate.jpg")));
+		_storeFrame.add(new JLabel(new ImageIcon("images/ironChestplate.jpg")));
+		_storeFrame.add(new JLabel(new ImageIcon("images/chainmailChestplate.jpg")));
+		_storeFrame.add(new JLabel(new ImageIcon("images/diamondChestplate.jpg")));
+		
 		// Store third row
 		_storeFrame.add(_storeBalance);
 		_storeFrame.add(new JLabel("<html>Name: " + _model.getStoreEquip(5).getName() + "<br /> Health: "
@@ -275,7 +307,10 @@ public class PlayerInterface implements Runnable {
 		_storeFrame.add(_storePurchase9);
 
 		// Skill Window
-		_skillFrame.getContentPane().setLayout(new GridLayout(2, 3));
+		_skillFrame.getContentPane().setLayout(new GridLayout(3, 3));
+		_skillFrame.add(new JLabel(""));
+		_skillFrame.add(new JLabel(new ImageIcon("images/heal.jpg")));
+		_skillFrame.add(new JLabel(new ImageIcon("images/fireball.jpg")));
 		_skillFrame.add(new JLabel("Temp"));
 		_skillFrame.add(_skillInformation1);
 		_skillFrame.add(_skillInformation2);
@@ -284,7 +319,12 @@ public class PlayerInterface implements Runnable {
 		_skillFrame.add(_useSkill2);
 
 		// Skill Target Window
-		_skillTargetFrame.getContentPane().setLayout(new GridLayout(2, 5));
+		_skillTargetFrame.getContentPane().setLayout(new GridLayout(3, 5));
+		_skillTargetFrame.add(_enemyInfoImage1);
+		_skillTargetFrame.add(_enemyInfoImage2);
+		_skillTargetFrame.add(_enemyInfoImage3);
+		_skillTargetFrame.add(_enemyInfoImage4);
+		_skillTargetFrame.add(_enemyInfoImage5);
 		_skillTargetFrame.add(_enemyTargetInfo1);
 		_skillTargetFrame.add(_enemyTargetInfo2);
 		_skillTargetFrame.add(_enemyTargetInfo3);
@@ -297,13 +337,15 @@ public class PlayerInterface implements Runnable {
 		_skillTargetFrame.add(_skillTarget5);
 
 		// Inventory Window
-		_inventoryFrame.getContentPane().setLayout(new GridLayout(2, 2));
+		_inventoryFrame.getContentPane().setLayout(new GridLayout(3, 2));
 		// Inventory First Row
+		_inventoryFrame.add(new JLabel(""));
+		_inventoryFrame.add(new JLabel(new ImageIcon("images/healthPotion.jpg")));
 		_inventoryFrame.add(_inventoryBalance);
 		_inventoryFrame.add(_consumableInformation1);
 		_inventoryFrame.add(_inventoryCloseButton);
 		_inventoryFrame.add(_inventoryUse1);
-
+		
 		_storeFrame.pack();
 		_storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -322,6 +364,16 @@ public class PlayerInterface implements Runnable {
 	}
 
 	public void update() {
+		_enemyImage1.setIcon(_model.getEnemyImage(_model.getEnemy1()));
+		_enemyImage2.setIcon(_model.getEnemyImage(_model.getEnemy2()));
+		_enemyImage3.setIcon(_model.getEnemyImage(_model.getEnemy3()));
+		_enemyImage4.setIcon(_model.getEnemyImage(_model.getEnemy4()));
+		_enemyImage5.setIcon(_model.getEnemyImage(_model.getEnemy5()));
+		_enemyInfoImage1.setIcon(_model.getEnemyImage(_model.getEnemy1()));
+		_enemyInfoImage2.setIcon(_model.getEnemyImage(_model.getEnemy2()));
+		_enemyInfoImage3.setIcon(_model.getEnemyImage(_model.getEnemy3()));
+		_enemyInfoImage4.setIcon(_model.getEnemyImage(_model.getEnemy4()));
+		_enemyInfoImage5.setIcon(_model.getEnemyImage(_model.getEnemy5()));
 		_enemy1.setText("<html> Name: " + _model.getEnemy1().getName() + "<br />Health: "
 				+ _model.getEnemy1().getHealth() + " / " + _model.getEnemy1().getMaxHealth() + "<br />Attack: "
 				+ _model.getEnemy1().getAttack() + "<br />Armor: " + _model.getEnemy1().getArmor() + "</html>");
